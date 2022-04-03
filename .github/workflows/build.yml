@@ -18,18 +18,22 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04,windows-2019,macos-10.15]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
+      
+      - name: checkout
+        uses: actions/checkout@v3
       - name: Setup Python
         uses: actions/setup-python@v3.1.0
         with:
           # Version range or exact version of a Python version to use, using SemVer's version range syntax.
-          python-version: 3.7.4# optional, default is 3.x
+          python-version: 3.7.4 # optional, default is 3.x
           # Used to specify a package manager for caching in the default directory. Supported values: pip, pipenv, poetry.
           # The target architecture (x86, x64) of the Python interpreter.
           architecture: x64 # optional
@@ -37,22 +41,23 @@ jobs:
 #           token: # optional, default is ${{ github.token }}
 #           # Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.
 #           cache-dependency-path: # optional
-
-      # Runs a set of commands using the runners shell
-#       - name: Run a multi-line script
-#         run: |
-#           echo Add other actions to build,
-#           echo test, and deploy your project.
-      - name: PyInstaller Windows
+      - name: pip req
+        run: pip3 install -r requirements.txt
+      - name: PyInstaller Build
         # You may pin to the exact commit or the version.
-        # uses: JackMcKew/pyinstaller-action-windows@a8dee21ad01bbc7e7363d445bb632691b95ba057
-        uses: JackMcKew/pyinstaller-action-windows@v0.1.2
+        # uses: eric2788/pyinstaller-build@38c902414aa367793063cc366a58f8f00733177c
+        uses: eric2788/pyinstaller-build@0.1.2
         with:
-          # Directory containing source code (optional requirements.txt).
-          #path: # default is src
-          # Specify a custom URL for PYPI
-          #pypi_url: # optional, default is https://pypi.python.org/
-          # Specify a custom URL for PYPI Index
-          pypi_index_url: https://mirrors.aliyun.com/pypi/simple/ # optional, default is https://pypi.python.org/simple
-          # Specify a file path for .spec file
-          #spec: # optional, default is 
+          # the main python file (without .py)
+          main: speech
+          # the dist path
+          # the version of python
+          #python_version: # optional, default is 3.9.7
+          # the version of pyinstaller
+          #pyinstaller_version: # optional, default is 4.7
+          # the output exe name
+          artifact: speech # optional, default is main
+          # whether to install requirements.txt before build
+          #use-dependencies: # optional, default is true
+          # whether to disppear console terminal
+          no-console: true # optional

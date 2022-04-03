@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: build-on-windows-latest
+name: build-without-sphinx
 
 # Controls when the workflow will run
 on:
@@ -42,7 +42,7 @@ jobs:
 #           # Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.
 #           cache-dependency-path: # optional
       - name: pip req
-        run: pip3 install -r requirements.txt
+        run: pip3 install -r req-w-s.txt
       - name: PyInstaller Build
         # You may pin to the exact commit or the version.
         # uses: eric2788/pyinstaller-build@38c902414aa367793063cc366a58f8f00733177c

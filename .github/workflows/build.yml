@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-python@v3.1.0
         with:
           # Version range or exact version of a Python version to use, using SemVer's version range syntax.
-          python-version: 3.7.4 # optional, default is 3.x
+          python-version: 3.7.5 # optional, default is 3.x
           # Used to specify a package manager for caching in the default directory. Supported values: pip, pipenv, poetry.
           # The target architecture (x86, x64) of the Python interpreter.
           architecture: x64 # optional

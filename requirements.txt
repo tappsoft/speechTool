@@ -1,0 +1,5 @@
+pocketsphinx==0.1.15 # if you don't want to use it, comment this line out
+pyqt5
+pynput
+qtawesome
+pyinstaller

@@ -52,12 +52,12 @@ jobs:
           main: speech
           # the dist path
           # the version of python
-          #python_version: # optional, default is 3.9.7
+          python_version: 3.7.5 # optional, default is 3.9.7
           # the version of pyinstaller
           #pyinstaller_version: # optional, default is 4.7
           # the output exe name
           artifact: speech # optional, default is main
           # whether to install requirements.txt before build
-          #use-dependencies: # optional, default is true
+          use-dependencies: false # optional, default is true
           # whether to disppear console terminal
           no-console: true # optional
